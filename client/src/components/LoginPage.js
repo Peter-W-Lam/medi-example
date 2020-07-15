@@ -13,7 +13,7 @@ function LoginPage() {
             <div className="login-left">
                 <img src={Logo} alt="Medi m" />
                 <span className="underline">
-                    <h3 className="underline-text">Welcome back to Medi!</h3>
+                    <h3 className="underline-text">Welcome back!</h3>
                 </span>
                 <a href="#">
                     <Button title="Go to sign in" id="login-btn" onClick={() => loginWithRedirect()}/>
