@@ -10,6 +10,8 @@ ReactDOM.render(
     domain="mymedi.us.auth0.com"
     clientId="EfVook2IGHHIapF2WbkCQmhc4j5Oyv2Z"
     redirectUri={window.location.origin}
+    // audience="https://mymedi.us.auth0.com/api/v2/" //Replace with our API
+    scope="read:current_user update:current_user_metadata"
   >
     <App />
   </Auth0Provider>
