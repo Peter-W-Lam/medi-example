@@ -3,20 +3,19 @@ import ReactDOM from 'react-dom';
 import { Auth0Provider } from "@auth0/auth0-react";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
+import 'bootstrap/dist/css/bootstrap.min.css'
+  // Removed React.StrictMode wrapper
+  // Note: no scope yet
 ReactDOM.render(
-  <React.StrictMode>
     <Auth0Provider
     domain="mymedi.us.auth0.com"
     clientId="EfVook2IGHHIapF2WbkCQmhc4j5Oyv2Z"
-    redirectUri={window.location.origin}
-    // audience="https://mymedi.us.auth0.com/api/v2/" //Replace with our API
-    scope="read:current_user update:current_user_metadata"
-  >
+    redirectUri={window.location.origin + '/api/home'}
+    audience="https://medi/api"
+    scope="edit:coupons"
+    >
     <App />
-  </Auth0Provider>
-    
-  </React.StrictMode>,
+  </Auth0Provider>,
   document.getElementById('root')
 );
 

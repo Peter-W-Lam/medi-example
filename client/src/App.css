@@ -10,3 +10,71 @@ html, body {
   font-family: 'Nunito', sans-serif;
   /* margin: 0; */
 }
+
+.CouponList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.CouponList .CouponCard {
+  margin: 10px;
+}
+
+.CouponCard {
+  width: 300px;
+  /* flex-basis: 160px; */
+}
+
+.logout-link {
+  cursor: pointer;
+}
+
+.CouponCard button {
+  margin: 5px 0px;
+}
+
+.modal-heading {
+  font-weight: bolder;
+}
+
+.modal-logo {
+  max-width: 60%;
+  margin-left: 20%;
+  margin-bottom: 20px;
+}
+
+.modal-card {
+  margin: 15px;
+}
+
+.bold {
+  font-weight: bolder;
+}
+
+.AdminPanel {
+  margin: 7vh 2vw;
+}
+.AdminPanel .list-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.modal-form {
+  padding: 25px;
+}
+
+.offer-formgroup {
+  background: #f2f2f2;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 15px;
+}
+
+
+.AdminPanel .top-bar button {
+  /* margin-left: 5%; */
+  /* margin-right: 2px; */
+  /* height: 40px; */
+}

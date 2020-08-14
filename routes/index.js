@@ -1,9 +1,14 @@
 const router = require('express').Router();
 const userRoutes = require('./users')
+const couponRoutes = require('./coupons')
 const path = require('path');
+const checkJwt = require('./verifyToken')
+const jwtAuthz = require('express-jwt-authz');
 
-router.use('/api/users', userRoutes)
+const checkScopes = jwtAuthz([ 'edit:coupons' ]);
 
+router.use('/api/users', checkJwt, userRoutes)
+router.use('/api/coupons', checkJwt, couponRoutes)
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
 	// console.log("in router")
