@@ -10,9 +10,6 @@ const axios = require('axios')
 
 function Dashboard() {
     const [userSub, setUserSub] = useState("")
-    const [username, setUsername] = useState("")
-
-
     const {user, getAccessTokenSilently} = useAuth0();
 
     const setAccessParams = async () => {
@@ -70,7 +67,7 @@ function Dashboard() {
     return (
         <div>
             <div style={{margin: "10vh 10vw"}}>
-                <h1>Welcome, </h1>
+            <h1>Welcome, {user.name}</h1>
             </div>
             
         </div>

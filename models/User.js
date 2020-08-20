@@ -6,8 +6,8 @@ const userSchema = new Schema({
         type: String
     }, 
     authID: {
-        type: String, 
-        required: true
+        type: String
+        // required: true
     },
     email: {
         type: String, 

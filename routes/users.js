@@ -7,8 +7,8 @@ router.route('/')
       .get(userController.findAll)
       .post(userController.create)
 
-router.route('/username/:username')
-      .get(userController.findByUsername)
+// router.route('/username/:username')
+//       .get(userController.findByUsername)
 
 router.route('/auth/:id')
       .get(userController.findByAuthID)
