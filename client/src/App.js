@@ -11,6 +11,7 @@ import './App.css';
 import AuthenticationApp from './components/AuthenticationApp';
 
 import {UserProvider} from './components/context/UserContext'
+import CorsPage from './components/pages/CorsPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact component={LoginPage} />
+            <Route path="/auth" exact component={CorsPage} />
             <PrivateRoute path="/api" component={AuthenticationApp} />
             {/* <Route path="/api/home" component={Dashboard} />
             <Route path="/api/admin" component={AdminPanel} /> */}
