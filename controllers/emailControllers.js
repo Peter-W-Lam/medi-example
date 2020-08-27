@@ -85,7 +85,10 @@ module.exports = {
         };
         
         transporter.sendMail(mailOptions, err => {
-            if (err) return res.status(500).send({ msg: err.message }); 
+            if (err) {
+                console.log('Err:', err.message)
+                return res.status(500).send({ msg: err.message })
+            }; 
             return res.status(200).send('Your support message has been sent!');
         })
             

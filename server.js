@@ -20,6 +20,51 @@ mongoose.connect(db)
     .catch(err => console.log(err));
 
 
+// Log both each request and response that the server gets and sends
+const getLoggerForStatusCode = (statusCode) => {
+    if (statusCode >= 500) {
+        return console.error.bind(console)
+    }
+    if (statusCode >= 400) {
+        return console.warn.bind(console)
+    }
+
+    return console.log.bind(console)
+}
+
+const logRequestStart = (req, res, next) => {
+    console.info(`${req.method} ${req.originalUrl}`)
+       
+    const cleanup = () => {
+        res.removeListener('finish', logFn)
+        res.removeListener('close', abortFn)
+        res.removeListener('error', errorFn)
+    }
+
+    const logFn = () => {
+        cleanup()
+        const logger = getLoggerForStatusCode(res.statusCode)
+        logger(`${res.statusCode} ${res.statusMessage}; ${res.get('Content-Length') || 0}b sent`)
+    }
+
+    const abortFn = () => {
+        cleanup()
+        console.warn('Request aborted by the client')
+    }
+
+    const errorFn = err => {
+        cleanup()
+        console.error(`Request pipeline error: ${err}`)
+    }
+
+    res.on('finish', logFn) // successful pipeline (regardless of its response)
+    res.on('close', abortFn) // aborted pipeline
+    res.on('error', errorFn) // pipeline internal error
+    next()
+}
+
+app.use(logRequestStart)
+
 
 // Deployment: serve static pages from react build 
 app.use(express.static('client/build')); 
