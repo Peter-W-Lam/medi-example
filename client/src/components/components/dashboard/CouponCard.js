@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-// import {fetchCouponByID} from '../../../api/fetchPosts'
+import {fetchCouponByID} from '../../../api/fetchPosts'
 import {useParams, Link} from 'react-router-dom'
 import {Button} from 'reactstrap'
 
@@ -11,12 +11,12 @@ export default function CouponCard(props) {
     const [data, setData] = useState(null)
 
     useEffect(() => {
-        // if (props.user.accessToken) {
-        //     fetchCouponByID(props.user.accessToken, couponID)
-        //     .then(res => {
-        //         setData(res)
-        //     })
-        // }
+        if (props.user.accessToken) {
+            fetchCouponByID(props.user.accessToken, couponID)
+            .then(res => {
+                setData(res)
+            })
+        }
         
     }, [props.user])
     

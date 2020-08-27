@@ -1,7 +1,7 @@
 const axios = require('axios')
 const {toast} = require('react-toastify')
-module.exports = { 
-    updateUserInfo: async (accessToken, userID, userInfo) => {
+// module.exports = { 
+    export const updateUserInfo = async (accessToken, userID, userInfo) => {
         axios({
             method: 'PUT', 
             headers: {'Authorization': `Bearer ${accessToken}`},
@@ -10,4 +10,4 @@ module.exports = {
         }).then()
         .catch(e => toast.error(e.message))
     }
-}
+// }

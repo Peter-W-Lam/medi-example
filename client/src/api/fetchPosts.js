@@ -1,7 +1,9 @@
 const axios = require('axios')
 const {toast} = require('react-toastify')
-module.exports = { 
-    fetchPosts: async (accessToken) => {
+
+// Try exporting with export keyword
+// module.exports = { 
+    export const fetchPosts = async (accessToken) => {
         try {
             const res = await axios.get('/api/coupons/', {headers: {'Authorization': `Bearer ${accessToken}`}})
             console.log(res.data)
@@ -9,26 +11,26 @@ module.exports = {
         } catch (e) {
             toast.error(e.message)
         }
-    },
+    }
 
-    fetchCouponByID: async (accessToken, couponID) => {
+    export const fetchCouponByID = async (accessToken, couponID) => {
         try {
             const res = await axios.get(`/api/coupons/${couponID}`, {headers: {'Authorization': `Bearer ${accessToken}`}})
             return res.data
         } catch (e) {
             toast.error(e.message)
         }   
-    },
+    }
 
-    fetchOfferByID: async (accessToken, couponID, offerID) => {
+    export const fetchOfferByID = async (accessToken, couponID, offerID) => {
         try {
             const res = await axios.get(`/api/coupons/${couponID}/offers/${offerID}`, {headers: {'Authorization': `Bearer ${accessToken}`}})
             return res.data
         } catch (e) {
             toast.error(e.message)
         }   
-    }, 
-    saveCoupon: async (accessToken, userID, couponID) => {
+    }
+    export const saveCoupon = async (accessToken, userID, couponID) => {
         try {
             const res = await axios({
                 method: 'POST', 
@@ -41,8 +43,8 @@ module.exports = {
         } catch (e) {
             toast.error(e.message)
         }   
-    }, 
-    unsaveCoupon: async (accessToken, userID, couponID) => {
+    } 
+    export const unsaveCoupon = async (accessToken, userID, couponID) => {
         try {
             const res = await axios({
                 method: 'DELETE',
@@ -55,4 +57,4 @@ module.exports = {
             toast.error(e.message)
         }   
     }   
-}
+// }
