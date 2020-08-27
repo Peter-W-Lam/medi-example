@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Switch, Route} from 'react-router-dom'
 import {useAuth0} from '@auth0/auth0-react'
 import axios from 'axios'
@@ -15,131 +15,62 @@ import Support from './pages/Support'
 import CouponCard from './components/dashboard/CouponCard'
 import OfferCard from './components/dashboard/OfferCard'
 
+import {UserContext} from './context/UserContext'
+import {getUserID, getAuth0Data} from '../api/user'
+
 // AuthenticationApp.js
 // Parent component for all routes that require authentication to be viewed. 
 // Makes call to user, stores it in state, and passes down to other components
 const AuthenticationApp = (props) => {
     const [storedUser, setStoredUser] = useState({})
+    const [user, setUser] = useContext(UserContext)
     const domain = "mymedi.us.auth0.com";
-    const { user, getAccessTokenSilently } = useAuth0();
-
-    const getUserID = async () => {
-            // // Query database for whether user exists
-        axios.get(`/api/users/auth/${storedUser.sub}`, {
-            validateStatus: () => true,
-            headers: {
-                'Authorization': `Bearer ${storedUser.accessToken}`
-            }})
-             .then(res => {
-                // If user does not exist, create user
-                if (res.status === 404) {
-                    axios({
-                        method: 'POST', 
-                        url: '/api/users', 
-                        headers: {
-                            'Authorization': `Bearer ${storedUser.accessToken}`
-                        }, 
-                        data: {
-                            name: user.name, 
-                            email: user.email, 
-                            authID: storedUser.sub
-                        }
-                    }).then(r => {
-                        setStoredUser({
-                            ...storedUser, 
-                            ...user,
-                            ...r.data
-                            // id: r.data._id
-                        })
-                    })
-                    .catch(e => console.log(e.message))
-                } else {
-                    setStoredUser({
-                        ...storedUser, 
-                        ...user,
-                        ...res.data
-                        // id: res.data._id
-                    })
-                }
-             })
-            // If no user exists, create user 
-             .catch(e => {
-                console.log("catch",e)   
-
-             })
-        
-    }
-
-    const fetchUserData = async () => {
-        try {
-            // Fetch Access token for API calls
-            const APIaccessToken = await getAccessTokenSilently({
-                audience: `https://medi/api`
-            });
-
-            // Fetch user role 
-            const managementAccessToken = await getAccessTokenSilently({
-                audience: `https://${domain}/api/v2/`,
-                scope: "read:current_user",
-            });
-        
-            const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
-        
-            const metadataResponse = await fetch(userDetailsByIdUrl, {
-                headers: {
-                    Authorization: `Bearer ${managementAccessToken}`,
-                },
-            });
-            const { app_metadata } = await metadataResponse.json();
-
-            // Update state with information
+    const { user: auth0User, getAccessTokenSilently } = useAuth0();
+    
+    const fetchAuth0Data = async () => {
+        if (auth0User && getAccessTokenSilently) {
+            const data = await getAuth0Data(domain, getAccessTokenSilently, auth0User.sub)
+            setUser({...user, ...auth0User, ...data})
+            
             setStoredUser({
                 ...storedUser, 
-                ...user,
-                accessToken: APIaccessToken, 
-                role: app_metadata.role
-            });
-          
-        } catch (e) {
-            toast.error(e.message, {
-                position: "top-center",
-                autoClose: 10000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
+                ...auth0User, 
+                ...data
+            })
+        }
+    }
 
-
-            console.log(e.message);
-          }
-    };
-
+    const fetchUserID = async () => {
+        if (storedUser.accessToken && storedUser.sub && !storedUser.id) {
+            getUserID(storedUser.accessToken, storedUser.sub, storedUser.name, storedUser.email)
+            .then(data => {
+                setUser({...user, ...data})
+                setStoredUser({...storedUser, ...data})
+            })
+        }
+    }
 
     useEffect(() => {
-        fetchUserData()
+        fetchAuth0Data();
     }, [])
 
     useEffect(() => {
-        if (storedUser.accessToken && !storedUser.id) {
-            
-            getUserID()
-        }
+        fetchUserID()
     }, [storedUser.accessToken])
 
     // testing only
     useEffect(() => {
         console.log("Updating storedUser:", storedUser)
     }, [storedUser])
+    
     // Does exact apply to both offer and coupon routes?
     return(
         <div className="mainApp">
             <ToastContainer />
-            <NavBar role={storedUser.role}/>
+            <NavBar />
             {/* <Switch> */}
                 <Route path="/api/home">
-                    <Dashboard user={storedUser}/>
+                    <Dashboard />
                 </Route>
                 <Route path="/api/profile">
                     <Profile user={storedUser} />
@@ -159,14 +90,14 @@ const AuthenticationApp = (props) => {
                 <Route path="/api/support">
                     <Support user={storedUser} />
                 </Route>
-                {storedUser.role === 'admin' && 
+                {storedUser.role && (storedUser.role === 'admin' && 
                 <Route path="/api/admin" render={(routeProps) => (
                     <AdminPanel 
                         {...routeProps} 
                         {...props} 
                         user={storedUser}
                     />
-                )} />}
+                )} />)}
             {/* </Switch> */}
         </div>
         

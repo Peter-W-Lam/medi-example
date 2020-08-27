@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {useAuth0, withAuthenticationRequired} from "@auth0/auth0-react"
 
 // import CouponList from './CouponList'
@@ -9,6 +9,8 @@ import SmallSpinner from '../components/SmallSpinner'
 import SearchBar from '../components/dashboard/SearchBar'
 import CardList from '../components/dashboard/CardList'
 import Categories from '../components/dashboard/Categories'
+import {UserContext} from '../../components/context/UserContext'
+
 
 const axios = require('axios')
 
@@ -17,6 +19,8 @@ function Dashboard(props) {
     const [searchQuery, setSearchQuery] = useState("")
     const [selectedCategory, setSelectedCategory] = useState("all"
     )
+    const [user, setUser] = useContext(UserContext)
+
     // useEffect(() => {
     //     console.log("access token:", props.user.accessToken)
     // }, [props.user])
@@ -24,14 +28,14 @@ function Dashboard(props) {
     return (
         <div className="Dashboard">
             
-            {props.user.isVerified != null ? 
-             (props.user.isVerified ?
+            {user.isVerified != null ? 
+             (user.isVerified ?
             <div>
                 <SearchBar setSearchQuery={setSearchQuery}/>
                 <Categories selected={selectedCategory} setSelected={setSelectedCategory}/>
-                <CardList query={searchQuery} user={props.user} category={selectedCategory}/>
+                <CardList query={searchQuery} category={selectedCategory}/>
             </div> :
-             <VerifyBlock user={props.user} />) :
+             <VerifyBlock />) :
              <SmallSpinner loading={true}/>}
         </div>
     )

@@ -1,6 +1,7 @@
 .SavedCards {
     display: flex;
     flex-wrap: wrap;
+    margin: 0 10px;
 }
 
 .SearchSaved input {
@@ -21,4 +22,35 @@
 .SavedOffers .SmallSpinner {
     margin-left: 35vw;
     margin-top: 30vh;
+}
+
+.SavedOffers .placeholder {
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.SavedOffers .placeholder h1 {
+    font-size: 37px;
+    line-height: 50px;
+    color: #999999;
+}
+
+.SavedOffers .placeholder p {
+    line-height: 27px;
+    text-align: center;
+
+    color: #999999;
+}
+
+.SavedOffers .placeholder img {
+    width: 35vw;
+}
+
+@media only screen and (max-width: 750px) {
+    .SearchSaved .filter-btn {
+        margin-left: 20px;
+    }
 }

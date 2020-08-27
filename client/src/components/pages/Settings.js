@@ -6,7 +6,7 @@ import SmallSpinner from '../components/SmallSpinner'
 function Settings(props) {
     return (
         <div className="Settings">
-            {props.user.isVerified ?
+            {props.user.isVerified != null ?
             <div className="card">
                 <div className="header">
                     <img src={props.user.picture} />

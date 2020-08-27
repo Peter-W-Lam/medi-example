@@ -1,34 +1,52 @@
-.SavedOffers {
+.Profile .SavedOffers {
     margin: 5vh 5vw;
 }
 
-.SavedOffers .card {
+.Profile .SavedOffers .card {
     border: 3px solid rgba(0, 0, 0, 0.0991848);
     background-color: transparent;
     border-radius: 19px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 230px;
+    width: 250px;
     height: 260px;
     padding: 0 10px;
-    margin: 20px;
+    margin: 10px;
 }
 
-.SavedOffers .card p {
+.Profile .SavedOffers .card p {
     font-size: 22px;
     color: #C1C1C1;
     text-align: center;
 }
 
-.SavedOffers a:hover {
+.Profile .SavedOffers a:hover {
     text-decoration: none;
 }
 
-.SavedOffers .cards {
+.Profile .SavedOffers .cards {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
-.SavedOffers h3 {
+.Profile .SavedOffers h3 {
     margin-left: 20px;
+}
+
+.Profile .SavedOffers .Card {
+    margin: 10px;
+}
+
+@media only screen and (max-width: 950px) {
+    .Profile .SavedOffers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .Profile .SavedOffers .cards {
+        justify-content: center;
+    }
 }

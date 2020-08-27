@@ -61,8 +61,58 @@
     cursor: pointer;
 }
 
-
-.form-group.selected label {
+.Categories .form-group.selected label {
     color: #FFF;
     background: var(--main-blue);
+}
+
+
+@media only screen and (max-width: 950px) {
+    .Categories {
+        width: 70vw;
+    }
+
+    .Categories .form-group label {
+        padding: 5px 20px;
+        border-radius: 40px;
+        font-size: 15px;
+    }
+
+    .Categories .form-group {
+        margin: 0 3px;
+        padding: 2px;
+    }
+
+    .Categories button {
+        top: 2px;
+        font-size: 18px;
+    }
+    
+    .Categories .scrollLeft {
+        left: 1.5vw;
+    }
+    
+    .Categories .scrollRight {
+        right: 6vw;
+    }
+
+    .Categories form {
+        max-width: 75%;
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin-left: calc(2vw + 20px);
+        /* padding-right: 10px; */
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .buttons {
+        display: none;
+    }
+
+    .Categories form {
+        flex-wrap: wrap;
+        overflow-x: auto;
+    }
 }

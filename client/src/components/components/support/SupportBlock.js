@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import {sendSupportEmail} from '../../../api/emailVerification'
+import {sendSupportEmail} from '../../../api/email'
 import './SupportBlock.css'
 
 export default function SupportBlock(props) {

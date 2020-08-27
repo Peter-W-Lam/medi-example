@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'r
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import {toast} from 'react-toastify'
 import systemInfo from '../../../utils/healthcareSystems'
-import {updateUserInfo} from '../../../api/userInfo'
+import {updateUserInfo} from '../../../api/user'
 import {Link} from 'react-router-dom'
 import './SettingsForm.css'
 

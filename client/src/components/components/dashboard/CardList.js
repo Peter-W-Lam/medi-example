@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Card from './Card.js'
 import './CardList.css'
 import {fetchPosts} from '../../../api/fetchPosts'
+import {UserContext} from '../../context/UserContext'
+
 export default function CardList(props) {
     // TODO: Fetch card data here and store in variable
     
     const [cardData, setCardData] = useState(null)
     const [filteredCardData, setFilteredCardData] = useState(null)
+    const [user, setUser] = useContext(UserContext)
+
     const getPosts = async () => {
-        if (props.user.accessToken) {
-            fetchPosts(props.user.accessToken)
+        if (user.accessToken) {
+            fetchPosts(user.accessToken)
             .then(data => setCardData(data))
         }
     }
@@ -27,7 +31,7 @@ export default function CardList(props) {
 
     useEffect(() => {
         getPosts()
-    }, [props.user])
+    }, [user])
 
     useEffect(() => {
         if (cardData) setFilteredCardData([...cardData]);
@@ -43,14 +47,15 @@ export default function CardList(props) {
 
     return (
         <div className="CardList">
-            {filteredCardData && filteredCardData.map(item => (<Card 
-                user={props.user}
-                img={item.logo}
-                name={item.company}
-                tagline={item.shortDescription}
-                id={item._id}
-                {...item}
-            />))}
+            {filteredCardData && filteredCardData.map(item => (
+                <Card 
+                    img={item.logo}
+                    name={item.company}
+                    tagline={item.shortDescription}
+                    id={item._id}
+                    key={item._id}
+                    {...item} />
+            ))}
         </div>
     )
 }

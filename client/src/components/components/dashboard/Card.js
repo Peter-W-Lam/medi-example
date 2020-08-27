@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { Link } from 'react-router-dom'
 import { saveCoupon, unsaveCoupon } from '../../../api/fetchPosts'
-import axios from 'axios'
-// import {usePalette} from 'react-palette'
+import {UserContext} from '../../context/UserContext'
 import './Card.css'
 
 function Card(props) {
     // const {data, loading, error} = usePalette(props.img)
     const [saved, setSaved] = useState(false)
+    const [user, setUser] = useContext(UserContext)
 
     useEffect(() => {
-        const savedCoupons = props.user.savedCoupons
+        const savedCoupons = user.savedCoupons
         const c = savedCoupons.filter(item => item === props._id)
         if (c.length > 0) {
             setSaved(true)
@@ -20,15 +20,13 @@ function Card(props) {
     const handleSave = () => {
         setSaved(!saved)
         if (saved) {
-            console.log("Unsaving card...")
-            unsaveCoupon(props.user.accessToken, props.user._id, props._id)
+            unsaveCoupon(user.accessToken, user._id, props._id)
         } else {
-            console.log("Saving card...")
             // Create POST request to '/api/users/:id/coupons
-            if (props.user.accessToken) {
-                saveCoupon(props.user.accessToken, props.user._id, props._id)
+            if (user.accessToken) {
+                saveCoupon(user.accessToken, user._id, props._id)
             } else {
-                console.log("could not make request bc no accesss token")
+                console.log("Could not make request because no access token was found")
             }
         }
     }

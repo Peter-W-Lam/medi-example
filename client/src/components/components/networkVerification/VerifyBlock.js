@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Button} from 'reactstrap'
 import VerifyForm from './VerifyForm'
 import { Mail } from '../../../assets'
 
-export default function VerifyBlock(props) {
+export default function VerifyBlock() {
 
     // TODO: Set validatedScreen according to whether email has been sent (lookup token)
     const [validatedScreen, setValidatedScreen] = useState(false)
     const [formValues, setFormValues] = useState({
         healthcareSystem: 'System 1', 
-        healthcareRole: 'Role #1'});
-
+        healthcareRole: 'Role #1'
+    });
 
     return (
         <div className="VerifyBlock">
@@ -26,7 +26,6 @@ export default function VerifyBlock(props) {
                 formValues={formValues}
                 setFormValues={setFormValues}
                 setValidatedScreen={setValidatedScreen} 
-                user={props.user}
                 />
             }
             

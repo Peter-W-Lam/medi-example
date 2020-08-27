@@ -10,20 +10,23 @@ import PrivateRoute from './components/PrivateRoute'
 import './App.css';
 import AuthenticationApp from './components/AuthenticationApp';
 
+import {UserProvider} from './components/context/UserContext'
 
 function App() {
   return (
     <div className="App">
-      <Router>
-        <Switch>
-          <Route path="/" exact component={LoginPage} />
-          <PrivateRoute path="/api" component={AuthenticationApp} />
-          {/* <Route path="/api/home" component={Dashboard} />
-          <Route path="/api/admin" component={AdminPanel} /> */}
-          {/* <Route path="/api/saved" component={Saved} /> */}
-          {/* <Route path="/api/loading" component={Loading} /> */}
-        </Switch>
-      </Router>
+      <UserProvider>
+        <Router>
+          <Switch>
+            <Route path="/" exact component={LoginPage} />
+            <PrivateRoute path="/api" component={AuthenticationApp} />
+            {/* <Route path="/api/home" component={Dashboard} />
+            <Route path="/api/admin" component={AdminPanel} /> */}
+            {/* <Route path="/api/saved" component={Saved} /> */}
+            {/* <Route path="/api/loading" component={Loading} /> */}
+          </Switch>
+        </Router>
+      </UserProvider>
 
 
       {/* {isAuthenticated ? 

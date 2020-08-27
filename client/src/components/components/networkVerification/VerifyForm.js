@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
+import React, { useState, useEffect, useContext } from 'react'
+import { Button, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import {sendVerificationEmail} from '../../../api/emailVerification'
-
+import {sendVerificationEmail} from '../../../api/email'
+import {updateUserInfo} from '../../../api/user'
+import {UserContext} from '../../context/UserContext'
 
 import './VerifyBlock.css'
 
 function VerifyForm(props) {
     const domains = ['system1.org', 'gmail.com', 'mymedi.us']
     const [healthcareDomain, setHealthcareDomain] = useState(domains[1])
+    const [user, setUser] = useContext(UserContext)
 
     const handleInputChange = (e) => {
         const newValues = {...props.formValues}
@@ -19,8 +21,8 @@ function VerifyForm(props) {
 
     const handleSubmit = (e) => {
         // Make POST request
-        sendVerificationEmail(props.formValues.networkEmail, props.user.accessToken, props.user._id)
-        
+        sendVerificationEmail(props.formValues.healthcareEmail, user.accessToken, user._id)
+        updateUserInfo(user.accessToken, user._id, props.formValues)
         props.setValidatedScreen(true)
     }
 
@@ -82,11 +84,11 @@ function VerifyForm(props) {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="networkEmail">Network Email</Label>
+                    <Label for="healthcareEmail">Network Email</Label>
                     <AvField
                         type="email"
-                        name="networkEmail"
-                        id="networkEmail"
+                        name="healthcareEmail"
+                        id="healthcareEmail"
                         placeholder="jdoe@email.com"
                         validate={{
                             required: {value: true, errorMessage: 'Please enter your network email.'},
@@ -99,14 +101,14 @@ function VerifyForm(props) {
                         Note: This email must be affiliated with your healthcare network, and should end in <span className="bold">@{healthcareDomain}</span>
                     </FormText>
                 </FormGroup>
-                {/* <FormGroup>
+                <FormGroup>
                     <Label for="healthcareRole">Role</Label>
                     <Input type="select" name="healthcareRole" id="healthcareRole">
                         <option>Role #1</option>
                         <option>Role #2</option>
                         <option>Role #3</option>
                     </Input>
-                </FormGroup> */}
+                </FormGroup>
                 <Button color="primary">Submit</Button>
             </AvForm>
 
