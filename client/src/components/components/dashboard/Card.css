@@ -1,0 +1,72 @@
+
+.Card {
+    /* box-shadow: 0px 16px 29px rgba(0, 0, 0, 0.068784); */
+    width: 250px;
+    height: 260px;
+    border-radius: 19px;
+    margin: 20px;
+    position: relative;
+    text-align: center;
+    background-color: #FFF;
+    transition: 0.2s ease-in;
+}
+.Card h1 {
+    font-weight: bold;
+    font-size: 25px;
+
+}
+
+.Card:hover {
+    box-shadow: 0px 16px 29px rgba(0, 0, 0, 0.068784);
+}
+.Card img {
+    width: 250px;
+    height: 130px;
+    border-radius: 19px 19px 0 0;
+    object-fit: cover;
+    border-bottom: 1px solid #DCDCDC;
+}
+
+.Card a {
+    text-decoration: none;
+    color: #818181;
+    font-size: 15px;
+    text-align: center;
+}
+.Card a:hover {
+    text-decoration: none;
+    color: #818181;
+}
+.save-btn {
+    position: absolute;
+    border: none;
+    background-color: #FFF;
+    box-shadow: 0 3px 7px 0 rgba(0,0,0,0.17);
+    width: 56px;
+    height: 20px;
+    font-size: 12px;
+    font-family: 'Nunito', sans-serif;
+    color: #A6A6A6;
+    top: 20px;
+    right: -15px;
+    /* display: none; */
+}
+
+.save-btn.saved {
+    background-color: var(--main-blue);
+    color: #FFF;
+}
+
+.Card .contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    padding: 0 10px;
+    margin-top: 16px;
+    margin-bottom: 5px;
+}
+
+.Card h1, a {
+    margin: 0;
+}

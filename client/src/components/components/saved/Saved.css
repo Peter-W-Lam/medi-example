@@ -1,0 +1,24 @@
+.SavedCards {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.SearchSaved input {
+    background: url('../../../assets/search.svg') no-repeat 20px 15px;
+    background-color: #FFF;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 14px 14px 58px;
+    outline: none;
+    margin: 10px 20px; 
+    width: 70%;
+}
+
+.SavedOffers h1 {
+    margin: 10px 20px;
+}
+
+.SavedOffers .SmallSpinner {
+    margin-left: 35vw;
+    margin-top: 30vh;
+}

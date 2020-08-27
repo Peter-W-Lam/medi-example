@@ -6,9 +6,37 @@ html, body {
 
 .App {
   --main-blue: #004B89;
-
+  --light-blue: #F3F8FC;
+  --light-gray: #F3F3F3;
   font-family: 'Nunito', sans-serif;
   /* margin: 0; */
+}
+
+.mainApp {
+  display: flex;
+  background: var(--light-blue);
+}
+
+.mainApp > div:nth-child(3) {
+  /* border: 1px solid red; */
+  margin-left: 260px;
+  /* margin-top: 7vh; */
+  /* margin-bottom: 7vh; */
+  min-height: 100vh;
+  width: 100%;
+}
+
+.primary-btn {
+  background-color: var(--main-blue)!important;
+}
+
+.Dashboard .SmallSpinner{
+  margin-left: 35%;
+  margin-top: 20%;
+}
+
+.bold {
+  font-style: bold;
 }
 
 .CouponList {
@@ -22,7 +50,6 @@ html, body {
 
 .CouponCard {
   width: 300px;
-  /* flex-basis: 160px; */
 }
 
 .logout-link {
@@ -77,4 +104,11 @@ html, body {
   /* margin-left: 5%; */
   /* margin-right: 2px; */
   /* height: 40px; */
+}
+
+.uppercased-subtitle h3{
+  text-transform: uppercase;
+  font-size: 18px;
+  line-height: 27px;
+  color: #8D8D8D;
 }

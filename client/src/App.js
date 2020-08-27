@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import LoginPage from './components/LoginPage'
-import Dashboard from './components/Dashboard'
+import Dashboard from './components/pages/Dashboard'
 import Loading from './components/Loading'
 import Saved from './components/Saved'
 import AdminPanel from './components/AdminPanel'

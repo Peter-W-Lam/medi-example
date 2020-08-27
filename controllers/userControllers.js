@@ -28,9 +28,7 @@ module.exports = {
                     res.status(404).send('User could not be found')
                 }
                 res.status(200).json(user)
-            }
-                
-            )
+            })
             .catch(err => res.status(404).json(err))
     },
     // No longer needed?
@@ -43,6 +41,7 @@ module.exports = {
     // Not sure if if statement is still needed
     create: function (req, res) {
         User.findOne({email: req.body.email}, (err, user) => {
+            console.log('creating new user');
             if (user) {
                 return res.status(400).json({err: 'email-exists', msg: 'User with email already exists'})
             }

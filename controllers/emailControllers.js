@@ -3,13 +3,12 @@ const Token = require('../models/Token')
 var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 
-
-
-
-
 module.exports = {
     verifyHealthcareEmail: (req, res) => {
         const { healthcareEmail, userID}  = req.body
+        if (!healthcareEmail) return res.status(400).send('Improper parameters');
+        if (!userID) return res.status(400).send('Improper parameters');
+        
         User.findById(userID, (err, user) => {
             if (err) res.status(500).send(err.message)
             if (!user) res.status(404).json({err: 'id-not-found', msg: 'No user with ID exists'})
@@ -40,7 +39,6 @@ module.exports = {
                 if (e) return res.status(500).send({ msg: e.message });
                 transporter.sendMail(mailOptions, err => {
                     if (err) return res.status(500).send({ msg: err.message }); 
-                    console.log("res should be fine by now");
                     return res.status(200).send('A verification email has been sent to ' + healthcareEmail + '.');
                 })
             })
@@ -62,5 +60,34 @@ module.exports = {
                 })
             })
         })
+    },
+    sendSupportEmail: (req, res) => {
+        const {supportBody, userEmail} = req.body 
+        const credentials = {
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.MAIL_USER, 
+                pass: process.env.MAIL_PASS  
+            }
+        }
+        
+        const transporter = nodemailer.createTransport(credentials)
+
+        var mailOptions = { 
+            from: process.env.MAIL_USER, 
+            to: process.env.MAIL_USER, 
+            subject: `Support message from ${userEmail}`, 
+            text: 'Hello,\n\n' + 
+            `You have received a new message from ${userEmail}:\n\n` + 
+            supportBody 
+        };
+        
+        transporter.sendMail(mailOptions, err => {
+            if (err) return res.status(500).send({ msg: err.message }); 
+            return res.status(200).send('Your support message has been sent!');
+        })
+            
     }
 }

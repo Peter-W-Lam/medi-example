@@ -1,0 +1,12 @@
+.Profile {
+    margin: 5vh 2vw;
+}
+
+.Profile .settings-btn {
+    float: right;
+}
+
+.Profile .SmallSpinner {
+    margin-left: 35vw;
+    margin-top: 30vh;
+}

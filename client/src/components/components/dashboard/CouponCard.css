@@ -1,0 +1,129 @@
+.CouponCard {
+    padding: 10vh 2vw;
+}
+
+.CouponCard .card {
+    width: 80%;
+    padding: 5%;
+    background: #FFF;
+    border-radius: 20px;
+    box-shadow: 0px 20px 34px rgba(0, 0, 0, 0.0533571);
+}
+
+.CouponCard .header {
+    
+    display: flex;
+}
+
+.CouponCard .card-img-header {
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.28));
+    width: 230px;
+    object-fit: contain;
+    border-radius: 11px;
+}
+
+.CouponCard .header div {
+    margin: 0 0 0 5%;
+}
+
+.CouponCard .header h1 {
+    font-weight: 600;
+    font-size: 44px;
+}
+
+.CouponCard .header p {
+    font-size: 15px;
+    line-height: 20px;
+    color: #9E9E9E;
+}
+
+.CouponCard .card h3 {
+    margin-top: 20px;
+    font-size: 26px;
+    color: #424242;
+}
+
+.CouponCard .offers {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CouponCard .offer-box {
+    border: 2px solid #D3D3D3;
+    border-radius: 12px;
+    padding: 26px;
+    width: 40%;
+    margin: 10px;
+}
+
+.offer-box p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    color: #424242;
+}
+
+.OfferCard {
+    padding: 10vh 2vw;
+}   
+
+.OfferCard .card {
+    width: 80%;
+    padding: 5%;
+    background: #FFF;
+    border-radius: 20px;
+    box-shadow: 0px 20px 34px rgba(0, 0, 0, 0.0533571);
+    border: none;
+    
+}
+.OfferCard .card > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+
+
+.OfferCard .offer-text, .terms {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #D3D3D3;
+    border-radius: 12px;
+    width: 100%;
+    padding: 10px 30px;
+    text-align: center;
+    margin: 10px;
+}
+.OfferCard .offer-text h3, .OfferCard .terms h3 {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+.OfferCard .offer-text p, .OfferCard .terms p {
+    /* font-weight: 600; */
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.OfferCard .card-img-header {
+    filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.28));
+    width: 230px;
+    object-fit: contain;
+    border-radius: 11px;
+    margin-bottom: 40px;
+}
+
+.OfferCard .offer-code {
+    display: none;
+}
+
+.OfferCard .displayed {
+    margin: 10px;
+    padding: 10px 10px;
+    background-color: #E5E5E5;
+    border-radius: 5px;
+    display: block;
+    font-size: 1.2em;
+}

@@ -1,0 +1,110 @@
+.NavBar {
+}
+
+.NavBar .contents {
+    box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.08857);
+    width: 260px;
+    overflow: hidden;
+    padding: 33px 22px;
+    height: 100vh;
+    background: #FFF;
+    position: fixed;
+}
+
+.NavBar .header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.NavBar .header h2 {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0;
+    padding: 2px 0 0 0;
+}
+
+.NavBar .header img {
+    padding: 0;
+    margin: 0;
+}
+
+.NavBar .links {
+    margin-top: 25px;
+}
+
+.NavLink:hover {
+    text-decoration: none;
+}
+
+.NavLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 17px 23px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.NavLink img {
+    padding-right: 49px;
+    width: 66px;
+}
+
+.NavLink h4 {
+    font-weight: 500;
+    font-size: 15px;
+    color: #9E9E9E;
+    margin: 0;
+}
+
+.NavLink.NavLink.selected {
+    background: var(--light-blue);
+}
+
+.NavLink.selected h4 {
+    color: #000;
+}
+
+.NavLink.selected .svg {
+    filter: invert(15%) sepia(63%) saturate(3798%) hue-rotate(192deg);
+}
+
+.NavLink .svg {
+    filter: invert(65%) sepia(5%) saturate(0%) hue-rotate(3deg) brightness(96%) contrast(91%);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .hamburger {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 30px;
+    }
+
+    .NavBar .contents {
+        width: 0;
+        padding: 0;
+    }
+
+    .NavBar .contents.open {
+        width: 100vw;
+    }
+
+    .NavBar .header {
+        display: none;
+    }
+
+    .NavBar .links {
+        margin-left: 20px;
+        margin-top: 70px;
+        margin-right: 25px;
+    }
+
+}

@@ -7,6 +7,7 @@ const couponSchema = new Schema({
     logo: String,
     shortDescription: String,
     companyDescription: String, 
+    category: String,
     offers: [offerSchema]
 })
 

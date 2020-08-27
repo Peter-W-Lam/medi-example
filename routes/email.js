@@ -6,5 +6,7 @@ router.route('/')
       .post(emailController.verifyHealthcareEmail);
 router.route('/confirm/:token')
       .get(emailController.confirmEmail)
-
+router.route('/support')
+      .post(emailController.sendSupportEmail)
+      
 module.exports = router

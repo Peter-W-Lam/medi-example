@@ -1,0 +1,27 @@
+.Support {
+    
+}
+
+.Support .card {
+    background-color: #FFF;
+    box-shadow: 0px 20px 34px rgba(0, 0, 0, 0.0899004);
+    border: none;
+    border-radius: 29px;
+    width: 70%;
+    margin: 8% 15%;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Support p{
+    margin: 0;
+}
+
+.Support img {
+    width: 50%;
+    margin: 0;
+    padding: 0;
+    /* margin-left: 20%; */
+}

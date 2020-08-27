@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>verified</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Color-Mockups" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Exports" transform="translate(-358.000000, -303.000000)">
+            <g id="verified" transform="translate(358.000000, 303.000000)">
+                <path d="M15,0 C6.72866824,0 0,6.72866824 0,15 C0,23.2713318 6.72866824,30 15,30 C23.2713318,30 30,23.2713318 30,15 C30,6.72866824 23.2713318,0 15,0 Z" id="Path" fill="#004B89"></path>
+                <path d="M22.6506722,11.2093359 L14.9062304,19.6206406 C14.6738906,19.872994 14.3689037,20 14.0639168,20 C13.7589299,20 13.453943,19.872994 13.2216032,19.6206406 L9.34949142,15.4149882 C8.88350286,14.9090968 8.88350286,14.0911401 9.34949142,13.5852487 C9.81526177,13.0791203 10.56813,13.0791203 11.0341186,13.5852487 L14.0639168,16.8760313 L20.9660451,9.37959632 C21.4318154,8.87346789 22.1846836,8.87346789 22.6506722,9.37959632 C23.1164426,9.88548775 23.1164426,10.7032074 22.6506722,11.2093359 Z" id="Path" fill="#FAFAFA"></path>
+            </g>
+        </g>
+    </g>
+</svg>
