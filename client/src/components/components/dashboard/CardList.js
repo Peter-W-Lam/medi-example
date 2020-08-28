@@ -17,14 +17,40 @@ export default function CardList(props) {
             .then(data => setCardData(data))
         }
     }
-    const filterCards = (query, category) => {
+
+    const filterCards = (query, category, sort) => {
         const filteredByTitle = cardData.filter(item => item.company.includes(query))
         if (category === "all") {
-            setFilteredCardData(filteredByTitle)
+            const sorted = sortCards(filteredByTitle, props.sortType)
+            console.log("filteredByTitle:", filteredByTitle)
+            setFilteredCardData(sorted)
         } else {
             const filteredByCategory = filteredByTitle.filter(item => item.category === category)
-            setFilteredCardData(filteredByCategory)
+            const sorted = sortCards(filteredByCategory, props.sortType)
+            setFilteredCardData(sorted)
         }
+    }
+
+    const compareCompany = (a, b) => {
+        if (a.company.toUpperCase > b.company.toUpperCase()) {
+            console.log(`${a.company.toUpperCase()} greater than ${b.company.toUpperCase()}`)
+            return 1;
+        } else {
+            return -1
+        }
+    }
+
+    const sortCards = (arr, sort) => {
+        if (arr === null) return;
+
+        var sorted = [...arr]
+        sorted = sorted.sort(compareCompany)
+        console.log("SORTED:", sorted)
+        if (sort === "reverse-alpha") {
+            sorted = sorted.reverse()
+        }
+        
+        return sorted
     }
 
     
@@ -38,11 +64,15 @@ export default function CardList(props) {
     }, [cardData])
 
     useEffect(() => {
+        console.log("sort type:", props.sortType)
         if (cardData && filteredCardData) {
-           filterCards(props.query, props.category) 
+           filterCards(props.query, props.category, props.sortType) 
         }
-    }, [props.query, props.category, cardData])
+    }, [props.query, props.category, props.sortType, cardData])
     
+    useEffect(() => {
+        // sortCards()
+    }, [filteredCardData])
     
 
     return (

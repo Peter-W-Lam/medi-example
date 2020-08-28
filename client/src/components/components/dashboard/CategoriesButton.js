@@ -10,7 +10,7 @@ export default function CategoriesButton(props) {
                 name="category" 
                 value={props.category} 
                 checked={props.selected === props.category} />
-            <label for={props.category}>
+            <label htmlFor={props.category}>
                 {props.customLabel ? props.customLabel : props.category}
             </label>
         </div>

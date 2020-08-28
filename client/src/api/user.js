@@ -12,6 +12,7 @@ export const updateUserInfo = async (accessToken, userID, userInfo) => {
 
 export const getUserID = async (accessToken, authID, name, email) => {
     try {
+        console.log()
         const res = await axios.get(`/api/users/auth/${authID}`, {
             validateStatus: () => true,
             headers: {
@@ -38,15 +39,21 @@ export const getUserID = async (accessToken, authID, name, email) => {
 
 export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
     try {
-        // Fetch access tokens first for our database, then for the management API
-        const APIaccessToken = await getAccessTokenSilently({
-            audience: `https://medi/api`
-        });
+        console.log("In getAuth0Data")
+
         const managementAccessToken = await getAccessTokenSilently({
             audience: `https://${domain}/api/v2/`,
             scope: "read:current_user"
         });
-    
+        console.log("got managementAccessToken:", managementAccessToken)
+
+        // Fetch access tokens first for our database, then for the management API
+        // const APIaccessToken = await getAccessTokenSilently({
+        //     audience: `https://medi/api`
+        // });
+
+        // console.log("got API accessToken:", APIaccessToken)
+        
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${sub}`;
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {
@@ -54,11 +61,12 @@ export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
                 Authorization: `Bearer ${managementAccessToken}`,
             },
         });
+        console.log("got metadataResponse", metadataResponse)
         const { app_metadata } = await metadataResponse.json();
 
         const data = {
             managementAccessToken: managementAccessToken, 
-            accessToken: APIaccessToken
+            accessToken: managementAccessToken
         }
 
         if (app_metadata.role) {
@@ -68,5 +76,7 @@ export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
         return data;
     } catch(e) {
         toast.error(e.message)
+        console.log(JSON.stringify(e))
+        
     }
 }

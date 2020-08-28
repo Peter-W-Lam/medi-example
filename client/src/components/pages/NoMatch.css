@@ -1,0 +1,25 @@
+.NoMatch {
+    /* padding: 10vh 10vw; */
+    margin: 10vh 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.NoMatch img {
+    max-width: 50%;
+}
+
+.NoMatch h1 {
+    font-size: 37px;
+    color: #999999;
+    letter-spacing: 0;
+    
+}
+
+.NoMatch a {
+    font-size: 20px;
+    color: #999999;
+}

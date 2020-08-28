@@ -1,6 +1,7 @@
 import React from 'react'
 import { SearchBlack } from '../../../assets'
 import './SearchBar.css'
+import FilterButton from './FilterButton'
 
 export default function SearchBar(props) {
     const handleInputChange = (e) => {
@@ -10,7 +11,7 @@ export default function SearchBar(props) {
     return (
         <div className="SearchBar">
             <input onChange={handleInputChange} type="text" placeholder="Search for offers" />
-            <button className="filter-btn">Filter</button>
+            <FilterButton setSortType={props.setSortType}/>
         </div>
     )
 }

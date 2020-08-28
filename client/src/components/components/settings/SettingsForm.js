@@ -17,6 +17,7 @@ export default function SettingsForm(props) {
     }   
 
     const handleSubmit = (e) => {
+        window.location.reload(false)
         // Make PUT request to server
         updateUserInfo(props.user.accessToken, props.user._id, formValues)
     }

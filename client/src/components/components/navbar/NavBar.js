@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useAuth0} from "@auth0/auth0-react"
 import {Link} from 'react-router-dom'
+import {UserContext} from '../../context/UserContext'
 
 import NavLink from './NavLink'
 import { LogoSquare, 
@@ -10,7 +11,8 @@ import { LogoSquare,
          SettingsBlack,
          SupportBlack,
          UserBlack,
-         Hamburger
+         Hamburger, 
+         Admin
         } from '../../../assets'
 import './NavBar.css'
 
@@ -19,6 +21,7 @@ const NavBar = (props) => {
 
     const [currPage, setCurrPage] = useState(0);
     const [open, setOpen] = useState(false);
+    const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
         switch(window.location.pathname) {
@@ -80,6 +83,10 @@ const NavBar = (props) => {
                             img={SupportBlack} 
                             selected={currPage === 4} 
                             name="Support"/>
+                    {user.role === 'admin' && 
+                    <NavLink to="/api/admin" 
+                             img={Admin} 
+                             name="Admin"/>}
                     <NavLink to="#" 
                             onClick={() => logout()} 
                             img={LogoutBlack} 

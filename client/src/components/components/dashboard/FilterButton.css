@@ -1,0 +1,61 @@
+
+
+.FilterButton .filter-btn {
+    background: url('../../../assets/filter.svg') no-repeat 65px 10px;
+    color: #9F9E9E;
+    height: 33px;
+    padding: 5px 43px 5px 17px;
+    border: 1.5px solid #D3D3D3;
+    border-radius: 3px; 
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.filter-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter-form {
+    padding: 20px;
+}
+
+.filter-form .form-group input {
+    margin-right: 10px;
+}
+
+/* .FilterButton .window {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: #FFF;
+    border-radius: 5px;
+    z-index: 60;
+    right: 20px;
+    top: 100px;
+    padding: 20px;
+} */
+
+/* .modal form.filter-form {
+    padding: 20px;
+}
+
+
+.filter-form label {
+    margin: 0;
+}
+
+.filter-form input {
+    max-height: 30px;
+    max-width: 30px;
+    position: relative;
+    margin: 0 5px 0 0;
+} */
+/* 
+.FilterButton .form-group-sort {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+} */

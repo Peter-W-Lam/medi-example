@@ -20,7 +20,7 @@ function App() {
         <Router>
           <Switch>
             <Route path="/" exact component={LoginPage} />
-            <Route path="/auth" exact component={CorsPage} />
+            <Route path="/auth" component={CorsPage} />
             <PrivateRoute path="/api" component={AuthenticationApp} />
             {/* <Route path="/api/home" component={Dashboard} />
             <Route path="/api/admin" component={AdminPanel} /> */}

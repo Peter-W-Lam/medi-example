@@ -21,6 +21,7 @@ function Dashboard(props) {
     )
     const [user, setUser] = useContext(UserContext)
 
+    const [sortType, setSortType] = useState("alpha")
     // useEffect(() => {
     //     console.log("access token:", props.user.accessToken)
     // }, [props.user])
@@ -31,9 +32,9 @@ function Dashboard(props) {
             {user.isVerified != null ? 
              (user.isVerified ?
             <div>
-                <SearchBar setSearchQuery={setSearchQuery}/>
+                <SearchBar setSearchQuery={setSearchQuery} setSortType={setSortType}/>
                 <Categories selected={selectedCategory} setSelected={setSelectedCategory}/>
-                <CardList query={searchQuery} category={selectedCategory}/>
+                <CardList query={searchQuery} category={selectedCategory} sortType={sortType}/>
             </div> :
              <VerifyBlock />) :
              <SmallSpinner loading={true}/>}

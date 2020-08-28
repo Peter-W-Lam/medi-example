@@ -57,6 +57,7 @@ export default function SavedCards(props) {
                     name={coupon.company}
                     tagline={coupon.shortDescription}
                     id={coupon._id}
+                    key={coupon._id}
                     {...coupon}
                 />
             ))}

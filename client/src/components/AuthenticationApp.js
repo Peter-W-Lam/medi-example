@@ -17,6 +17,7 @@ import OfferCard from './components/dashboard/OfferCard'
 
 import {UserContext} from './context/UserContext'
 import {getUserID, getAuth0Data} from '../api/user'
+import NoMatch from './pages/NoMatch'
 
 // AuthenticationApp.js
 // Parent component for all routes that require authentication to be viewed. 
@@ -25,7 +26,10 @@ const AuthenticationApp = (props) => {
     const [storedUser, setStoredUser] = useState({})
     const [user, setUser] = useContext(UserContext)
     const domain = "mymedi.us.auth0.com";
-    const { user: auth0User, getAccessTokenSilently } = useAuth0();
+    const { user: auth0User, 
+            getAccessTokenSilently, 
+            isAuthenticated,
+            loginWithRedirect } = useAuth0();
     
     const fetchAuth0Data = async () => {
         if (auth0User && getAccessTokenSilently) {
@@ -51,7 +55,12 @@ const AuthenticationApp = (props) => {
     }
 
     useEffect(() => {
-        fetchAuth0Data();
+        if (isAuthenticated) {
+            fetchAuth0Data();
+        } else {
+            loginWithRedirect();
+        }
+        
     }, [])
 
     useEffect(() => {
@@ -68,7 +77,7 @@ const AuthenticationApp = (props) => {
         <div className="mainApp">
             <ToastContainer />
             <NavBar />
-            {/* <Switch> */}
+            <Switch>
                 <Route path="/api/home">
                     <Dashboard />
                 </Route>
@@ -98,7 +107,8 @@ const AuthenticationApp = (props) => {
                         user={storedUser}
                     />
                 )} />)}
-            {/* </Switch> */}
+                <Route path="*" component={NoMatch} />
+            </Switch>
         </div>
         
     )
