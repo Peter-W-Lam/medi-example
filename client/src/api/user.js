@@ -43,7 +43,7 @@ export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
 
         const managementAccessToken = await getAccessTokenSilently({
             audience: `https://${domain}/api/v2/`,
-            scope: "read:current_user"
+            scope: "read:current_user edit:coupons"
         });
         console.log("got managementAccessToken:", managementAccessToken)
 
@@ -63,7 +63,7 @@ export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
         });
         console.log("got metadataResponse", metadataResponse)
         const { app_metadata } = await metadataResponse.json();
-
+        console.log("Got app_metadata,", app_metadata)
         const data = {
             managementAccessToken: managementAccessToken, 
             accessToken: managementAccessToken
