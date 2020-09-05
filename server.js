@@ -72,7 +72,13 @@ app.use(express.static('client/build'));
 app.use('/', routes);
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Server started on port ${port}`))
+const httpServer = app.listen(port, () => console.log(`Server started on port ${port}`));
+
+[`exit`, `SIGINT`, `SIGUSR1`, `SIGUSR2`, `uncaughtException`, `SIGTERM`].forEach((event) => {
+    process.on(event, () => {
+      httpServer.close(() => process.exit(0))
+    })
+  })
 
 
 // Nodemon debugging code: 

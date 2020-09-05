@@ -22,7 +22,6 @@ export default function CardList(props) {
         const filteredByTitle = cardData.filter(item => item.company.includes(query))
         if (category === "all") {
             const sorted = sortCards(filteredByTitle, props.sortType)
-            console.log("filteredByTitle:", filteredByTitle)
             setFilteredCardData(sorted)
         } else {
             const filteredByCategory = filteredByTitle.filter(item => item.category === category)
@@ -33,7 +32,6 @@ export default function CardList(props) {
 
     const compareCompany = (a, b) => {
         if (a.company.toUpperCase > b.company.toUpperCase()) {
-            console.log(`${a.company.toUpperCase()} greater than ${b.company.toUpperCase()}`)
             return 1;
         } else {
             return -1
@@ -45,7 +43,6 @@ export default function CardList(props) {
 
         var sorted = [...arr]
         sorted = sorted.sort(compareCompany)
-        console.log("SORTED:", sorted)
         if (sort === "reverse-alpha") {
             sorted = sorted.reverse()
         }

@@ -23,6 +23,7 @@ function VerifyForm(props) {
         // Make POST request
         sendVerificationEmail(props.formValues.healthcareEmail, user.accessToken, user._id)
         updateUserInfo(user.accessToken, user._id, props.formValues)
+        props.fetchTokens()
         props.setValidatedScreen(true)
     }
 
@@ -62,12 +63,14 @@ function VerifyForm(props) {
                         name="name" 
                         id="name" 
                         placeholder="First Last" 
-                        required/>
+                        required
+                        value={props.formValues.name}
+                        />
                     <FormFeedback>This field is required.</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                     <Label for="healthcareSystem">Healthcare System Affiliation</Label>
-                    <Input type="select" name="healthcareSystem" id="healthcareSystem">
+                    <Input type="select" name="healthcareSystem" id="healthcareSystem" value={props.formValues.healthcareSystem}>
                         <option>System 1</option>
                         <option>Gmail (Testing Route)</option>
                         <option>Medi (Testing Route)</option>
@@ -80,6 +83,7 @@ function VerifyForm(props) {
                         name="dateOfBirth"
                         id="dateOfBirth"
                         placeholder="mm/dd/yyyy"
+                        value={props.formValues.dateOfBirth}
                         required
                     />
                 </FormGroup>
@@ -90,6 +94,7 @@ function VerifyForm(props) {
                         name="healthcareEmail"
                         id="healthcareEmail"
                         placeholder="jdoe@email.com"
+                        value={props.formValues.healthcareEmail}
                         validate={{
                             required: {value: true, errorMessage: 'Please enter your network email.'},
                             pattern: {
@@ -103,13 +108,14 @@ function VerifyForm(props) {
                 </FormGroup>
                 <FormGroup>
                     <Label for="healthcareRole">Role</Label>
-                    <Input type="select" name="healthcareRole" id="healthcareRole">
+                    <Input type="select" name="healthcareRole" id="healthcareRole" value={props.formValues.healthcareRole}>
                         <option>Role #1</option>
                         <option>Role #2</option>
                         <option>Role #3</option>
                     </Input>
                 </FormGroup>
-                <Button color="primary">Submit</Button>
+                <Button disabled={props.timeSinceGen > 0} color="primary">Submit</Button>
+                <p className={props.timeSinceGen <= 0 ? 'message hidden' : 'message'}>You can generate a new verification email with your updated information in {props.timeSinceGen} seconds</p>
             </AvForm>
 
             

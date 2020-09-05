@@ -7,22 +7,52 @@
     min-height: 100vh;
 }
 
-.login-left, .login-right {
+.reg-left, .login-right {
     width: 50%;
 }
 
-.login-left {
+.reg-left {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* margin: 10vh 10vw; */
     text-align: center;
 }
 
-.login-left img {
-    margin-top: 20%;
+.reg-left .systems p {
+    font-size: 13px;
+}
+
+.reg-left .logo {
+    margin-top: 10%;
     width: 50px;
 }
+
+.reg-left .logo {
+    margin-bottom: 25px;
+}
+
+.reg-left .systems {
+    margin-top: 25px;
+    width: 50%;
+}
+
+.reg-left.Signup  .systems{
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.reg-left .systems img {
+    margin: 0;
+    width: 100px;
+}
+
+.reg-left .steps {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 .login-right {
     background-color: var(--main-blue);
@@ -46,7 +76,7 @@
 }
 
 .underline-text {
-    font-size: 24px;
+    font-size: 30px;
 }
 
 .underline-text:after {
@@ -55,7 +85,7 @@
     height: 4px;
     background: var(--main-blue);
     position: absolute;
-    margin-top: 32px;
+    margin-top: 34px;
     left: 25%;
   }
 

@@ -69,7 +69,7 @@
 
 @media only screen and (max-width: 950px) {
     .Categories {
-        width: 70vw;
+        width: 65vw;
     }
 
     .Categories .form-group label {
@@ -106,13 +106,10 @@
     }
 }
 
-@media only screen and (max-width: 800px) {
-    .buttons {
-        display: none;
-    }
 
+@media only screen and (max-width: 600px) {
     .Categories form {
-        flex-wrap: wrap;
-        overflow-x: auto;
+        max-width: 80vw;
+        width: 80vw;
     }
 }

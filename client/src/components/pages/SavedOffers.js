@@ -1,26 +1,27 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import SavedCards from '../components/saved/SavedCards'
 import SearchSaved from '../components/saved/SearchSaved'
 import SmallSpinner from '../components/SmallSpinner'
 import {NoData} from '../../assets'
-
+import {UserContext} from '../context/UserContext'
 function SavedOffers(props) {
     const [query, setQuery] = useState("")
+    const [user, setUser] = useContext(UserContext)
 
     return (
         <div className="SavedOffers">
-            {props.user.isVerified != null ? 
-                (!props.user.isVerified ? 
+            {user.isVerified != null ? 
+                (!user.isVerified ? 
                     <div className="placeholder">
                         <h1>There's nothing here yet</h1>
                         <p>Verify your email and get started browsing offers.</p>
                         <img src={NoData} alt="Woman looking at screen with no data on it" />
                     </div> :
-                    (props.user.savedCoupons.length > 0 ? 
+                    (user.savedCoupons.length > 0 ? 
                         <>
                             <h1>My Saved Offers</h1>
                             <SearchSaved setQuery={setQuery}/>
-                            <SavedCards user={props.user} query={query}/>
+                            <SavedCards user={user} query={query}/>
                         </> : 
                         <div className="placeholder">
                             <h1>There's nothing here yet</h1>

@@ -28,6 +28,7 @@ html, body {
 
 .primary-btn {
   background-color: var(--main-blue)!important;
+  border: none !important;
 }
 
 .Dashboard .SmallSpinner{
@@ -99,17 +100,17 @@ html, body {
   padding: 15px;
 }
 
-
-.AdminPanel .top-bar button {
-  /* margin-left: 5%; */
-  /* margin-right: 2px; */
-  /* height: 40px; */
-}
-
 .uppercased-subtitle h3{
   text-transform: uppercase;
   font-size: 18px;
   line-height: 27px;
   color: #8D8D8D;
+}
+
+@media only screen and (max-width: 600px) {
+  .mainApp > div:nth-child(3) {
+    margin-left: 0;
+    /* margin-top: 8vh; */
+  }
 }
 

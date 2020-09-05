@@ -1,25 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './LoginPage.css'
 import { useAuth0 } from "@auth0/auth0-react";
-import Logo from '../assets/logo.jpg'
 import LoginBG from '../assets/login-bg.png'
-import Button from './Button'
+import Login from './components/login/Login';
+import Signup from './components/login/Signup';
 
 function LoginPage() {
 
     const { loginWithRedirect } = useAuth0();
+    
+
     return (
         <div className="LoginPage">
-            <div className="login-left">
-                <img src={Logo} alt="Medi m" />
-                <span className="underline">
-                    <h3 className="underline-text">Welcome back!</h3>
-                </span>
-                <a href="#">
-                    <Button title="Go to sign in" id="login-btn" onClick={() => loginWithRedirect()}/>
-                </a>
-                <p>Don't have an account? <span className="clickable-text">Join Medi</span></p>
-            </div>
+            <Signup loginWithRedirect={loginWithRedirect}/>
             <div className="login-right">
                 <div className="temp-menu">
                     <a href="#about">About</a>

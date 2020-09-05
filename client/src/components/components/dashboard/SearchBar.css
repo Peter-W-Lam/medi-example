@@ -1,4 +1,5 @@
 .SearchBar {
+    /* border: 1px solid red; */
     width: 100%;
     border: none;
     border-bottom: 1px solid #DBDADA;
@@ -15,7 +16,11 @@
     border: none;
     outline: none; /*TODO: MUST be fixed!*/
     border: none;
-    
+    transition: box-shadow 0.1s ease-in;
+}
+
+.SearchBar input:focus {    
+    box-shadow: 0 0 0 2px #BDD9F0;
 }
 
 .SearchBar input::placeholder {
@@ -38,4 +43,45 @@
     position: absolute;
     top: 10px;
     right: 20px;
+}
+
+@media only screen and (max-width: 850px) {
+    .SearchBar {
+        /* width: 95%; */
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .SearchBar {
+        /* width: 60%; */
+        border: none;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
+    .SearchBar input {
+        margin: 12px 7vw 0 0;
+        background: url('../../../assets/search.svg') no-repeat 20px 12px;
+        background-color: #FFF;
+        height: 45px;
+        padding: 0 10px 0 60px;
+        border-radius: 25px;
+        width: 60%;
+        border: none;
+        outline: 0; /*TODO: MUST be fixed!*/
+    }
+
+
+    .SearchBar .FilterButton {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .SearchBar input {
+        background: url('../../../assets/search.svg') no-repeat 10px 12px;
+        background-color: #FFF;
+        padding: 0 10px 0 40px;
+    }
 }

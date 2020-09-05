@@ -12,7 +12,6 @@ export const updateUserInfo = async (accessToken, userID, userInfo) => {
 
 export const getUserID = async (accessToken, authID, name, email) => {
     try {
-        console.log()
         const res = await axios.get(`/api/users/auth/${authID}`, {
             validateStatus: () => true,
             headers: {
@@ -37,46 +36,51 @@ export const getUserID = async (accessToken, authID, name, email) => {
     }
 }
 
-export const getAuth0Data = async (domain, getAccessTokenSilently, sub) => {
-    try {
-        console.log("In getAuth0Data")
 
+export const getManagementToken = async (domain, getAccessTokenSilently, sub) => {
+    try {
+        // This will throw a login-required error on Safari 
         const managementAccessToken = await getAccessTokenSilently({
             audience: `https://${domain}/api/v2/`,
             scope: "read:current_user edit:coupons"
         });
-        console.log("got managementAccessToken:", managementAccessToken)
 
-        // Fetch access tokens first for our database, then for the management API
-        // const APIaccessToken = await getAccessTokenSilently({
-        //     audience: `https://medi/api`
-        // });
-
-        // console.log("got API accessToken:", APIaccessToken)
-        
         const userDetailsByIdUrl = `https://${domain}/api/v2/users/${sub}`;
 
         const metadataResponse = await fetch(userDetailsByIdUrl, {
             headers: {
                 Authorization: `Bearer ${managementAccessToken}`,
-            },
+            }
         });
-        console.log("got metadataResponse", metadataResponse)
+
         const { app_metadata } = await metadataResponse.json();
-        console.log("Got app_metadata,", app_metadata)
+        
         const data = {
-            managementAccessToken: managementAccessToken, 
-            accessToken: managementAccessToken
+            managementAccessToken: managementAccessToken
         }
 
         if (app_metadata.role) {
             data.role = app_metadata.role
         }
 
-        return data;
+        return data
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export const getAPItoken = async (domain, getAccessTokenSilently, sub) => {
+    try {
+
+        const APIaccessToken = await getAccessTokenSilently({
+            audience: `https://medi/api`, 
+            scope: "edit:coupons"
+        });
+
+        return {accessToken: APIaccessToken};
+
     } catch(e) {
         toast.error(e.message)
-        console.log(JSON.stringify(e))
-        
+        console.log(e)
     }
 }

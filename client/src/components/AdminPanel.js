@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useAuth0, withAuthenticationRequired} from "@auth0/auth0-react"
 import {
     Container, ListGroup, ListGroupItemHeading, Button,
@@ -7,15 +7,15 @@ import {
 } from 'reactstrap'
 import CouponListItem from './CouponListItem'
 import axios from 'axios'
-
+import {UserContext} from './context/UserContext'
 function AdminPanel(props) {
     const [coupons, setCoupons] = useState(null)
-    
+    const [user, setUser] = useContext(UserContext)
 
     const fetchCoupons = async() => {
         axios.get('/api/coupons', {
             headers: {
-                'Authorization': `Bearer ${props.user.accessToken}`
+                'Authorization': `Bearer ${user.accessToken}`
             }
         })
         .then(coupons => {
@@ -25,9 +25,9 @@ function AdminPanel(props) {
     }
 
     useEffect(() => {
-        if (!props.user.accessToken) return;
+        if (!user.accessToken) return;
         fetchCoupons()
-    }, [props.user])
+    }, [user])
 
     // Modal functions
     const [createModal, setCreateModal] = useState(false)
@@ -41,7 +41,7 @@ function AdminPanel(props) {
     const createItem = async () => {
         axios.post('/api/coupons', formValues, {
             headers: {
-                'Authorization': `Bearer ${props.user.accessToken}`
+                'Authorization': `Bearer ${user.accessToken}`
             }
         })
         .then(res => fetchCoupons())
@@ -101,7 +101,7 @@ function AdminPanel(props) {
                     </ListGroupItemHeading>
                     {coupons && coupons.map(coupon => (
                         <CouponListItem 
-                            user={props.user} 
+                            user={user} 
                             coupon={coupon} 
                             key={coupon._id}
                             fetchCoupons={fetchCoupons}

@@ -2,20 +2,21 @@ const axios = require('axios')
 const {toast} = require('react-toastify')
 
 module.exports = {
-    sendVerificationEmail: (healthcareEmail, accessToken, userID) => {
-        axios({
-            method: 'post', 
-            url: '/api/email/', 
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            },
-            data: {
-                healthcareEmail: healthcareEmail,
-                userID: userID
-            } 
-        })
-        .then(res => console.log(res))
-        .catch(e => {
+    sendVerificationEmail: async (healthcareEmail, accessToken, userID) => {
+        try {
+            const res = await axios({
+                method: 'post', 
+                url: '/api/email/', 
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                data: {
+                    healthcareEmail: healthcareEmail,
+                    userID: userID
+                } 
+            })
+            return res;
+        } catch (e) {
             toast.error(e.message, {
                 position: "top-center",
                 autoClose: 10000,
@@ -26,7 +27,7 @@ module.exports = {
                 progress: undefined,
             });
             console.log(e)
-        })
+        }
     }, 
     sendSupportEmail: (email, message) => {
         axios({

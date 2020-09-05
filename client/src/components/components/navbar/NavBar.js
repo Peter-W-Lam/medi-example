@@ -88,7 +88,7 @@ const NavBar = (props) => {
                              img={Admin} 
                              name="Admin"/>}
                     <NavLink to="#" 
-                            onClick={() => logout()} 
+                            onClick={() => logout({ returnTo: window.location.origin })} 
                             img={LogoutBlack} 
                             selected={currPage === 5} 
                             name="Log out"/>

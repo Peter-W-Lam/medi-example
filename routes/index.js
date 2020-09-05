@@ -17,6 +17,6 @@ router.use(function(req, res) {
 	// console.log("in router")
 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
-
+  
 
 module.exports = router;

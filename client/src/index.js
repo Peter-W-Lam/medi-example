@@ -11,8 +11,8 @@ ReactDOM.render(
     domain="mymedi.us.auth0.com"
     clientId="EfVook2IGHHIapF2WbkCQmhc4j5Oyv2Z"
     redirectUri={window.location.origin + '/api/home'}
-    audience="https://mymedi.us.auth0.com/api/v2/"
-    scope="edit:coupons read:current_user"
+    audience="https://medi/api"
+    scope="edit:coupons"
     useRefreshTokens={true}
     // cacheLocation="localstorage"
     >

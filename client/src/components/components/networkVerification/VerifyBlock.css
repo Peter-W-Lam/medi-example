@@ -18,3 +18,13 @@
 .check-inbox img {
     max-width: 343px;
 }
+
+.VerifyBlock .message {
+    font-size: 14px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.VerifyBlock .message.hidden {
+    display: none;
+}

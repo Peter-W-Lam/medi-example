@@ -17,7 +17,7 @@ const checkJwt = jwt({
     }),
   
     // Validate the audience and the issuer.
-    audience: 'https://mymedi.us.auth0.com/api/v2/',
+    audience: 'https://medi/api',
     issuer: `https://mymedi.us.auth0.com/`,
     algorithms: ['RS256']
 });

@@ -4,7 +4,7 @@ var crypto = require('crypto');
 var nodemailer = require('nodemailer');
 
 module.exports = {
-    verifyHealthcareEmail: (req, res) => {
+    verifyHealthcareEmail: async (req, res) => {
         const { healthcareEmail, userID}  = req.body
         if (!healthcareEmail) return res.status(400).send('Improper parameters');
         if (!userID) return res.status(400).send('Improper parameters');
@@ -44,6 +44,17 @@ module.exports = {
             })
         })
     }, 
+    findToken: (req, res) => {
+        const {userID} = req.body
+        console.log("userID:", userID)
+        // if (!req.body.userID) res.status(400).send("No userID was found")
+
+        Token.find({_userId: userID}, (err, tokens) => {
+            if (err) return res.status(404).send('Token not found')
+
+            res.status(200).json(tokens)
+        })
+    },
     confirmEmail: (req, res) => {
         Token.findOne({token: req.params.token}, (err, token) => {
             if (err) return res.status(500).send(err.message)

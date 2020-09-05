@@ -16,7 +16,8 @@ import CouponCard from './components/dashboard/CouponCard'
 import OfferCard from './components/dashboard/OfferCard'
 
 import {UserContext} from './context/UserContext'
-import {getUserID, getAuth0Data} from '../api/user'
+import {getUserID, getAPItoken, getManagementToken} from '../api/user'
+import {setWithExpiry, getWithExpiry} from '../api/utils'
 import NoMatch from './pages/NoMatch'
 
 // AuthenticationApp.js
@@ -26,27 +27,23 @@ const AuthenticationApp = (props) => {
     const [storedUser, setStoredUser] = useState({})
     const [user, setUser] = useContext(UserContext)
     const domain = "mymedi.us.auth0.com";
-    const { user: auth0User, 
-            getAccessTokenSilently, 
-            isAuthenticated,
-            loginWithRedirect } = useAuth0();
-    
-    const fetchAuth0Data = async () => {
+    const { user: auth0User, getAccessTokenSilently } = useAuth0();
+
+
+    const fetchAuth0Data = async (auth0User, getAccessTokenSilently) => {
         if (auth0User && getAccessTokenSilently) {
-            const data = await getAuth0Data(domain, getAccessTokenSilently, auth0User.sub)
-            setUser({...user, ...auth0User, ...data})
+            const data = await getAPItoken(domain, getAccessTokenSilently, auth0User.sub)
+            const adminInfo = await getManagementToken(domain, getAccessTokenSilently, auth0User.sub)
             
-            setStoredUser({
-                ...storedUser, 
-                ...auth0User, 
-                ...data
-            })
+            setUser({...user, ...auth0User, ...data, ...adminInfo})
+            setStoredUser({...storedUser, ...auth0User, ...data, ...adminInfo})
+            setWithExpiry("user", {...user, ...auth0User, ...data, ...adminInfo}, 14000000)
         }
     }
 
     const fetchUserID = async () => {
-        if (storedUser.accessToken && storedUser.sub && !storedUser.id) {
-            getUserID(storedUser.accessToken, storedUser.sub, storedUser.name, storedUser.email)
+        if (user.accessToken && user.sub && !user.id) {
+            getUserID(user.accessToken, user.sub, user.name, user.email)
             .then(data => {
                 setUser({...user, ...data})
                 setStoredUser({...storedUser, ...data})
@@ -54,23 +51,34 @@ const AuthenticationApp = (props) => {
         }
     }
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            fetchAuth0Data();
-        } else {
-            loginWithRedirect();
-        }
+    
+
+    const onPageLoad = async () => {
         
+        // If the user exists in localStorage already, exit, and set user accordingly 
+        // in state
+        if (getWithExpiry("user")) {
+            const localUser = getWithExpiry("user");
+            setUser(localUser)
+            setStoredUser(localUser)
+        } else { // Else, call the API to get this data again
+            fetchAuth0Data(auth0User, getAccessTokenSilently)
+        }
+    }
+
+    useEffect(() => {
+        onPageLoad()
     }, [])
 
     useEffect(() => {
         fetchUserID()
-    }, [storedUser.accessToken])
+    }, [user.accessToken])
 
     // testing only
-    useEffect(() => {
-        console.log("Updating storedUser:", storedUser)
-    }, [storedUser])
+    // useEffect(() => {
+    //     console.log("Updating storedUser:", storedUser)
+    //     console.log("Updating user:", user)
+    // }, [user])
     
     // Does exact apply to both offer and coupon routes?
     return(
@@ -78,28 +86,20 @@ const AuthenticationApp = (props) => {
             <ToastContainer />
             <NavBar />
             <Switch>
-                <Route path="/api/home">
-                    <Dashboard />
-                </Route>
-                <Route path="/api/profile">
-                    <Profile user={storedUser} />
-                </Route>
+                <Route path="/api/home" component={Dashboard} />
+                <Route path="/api/profile" component={Profile} />
                 <Route path="/api/coupons/:couponID/offer/:offerID" exact>
                     <OfferCard user={storedUser}/>
                 </Route>
                 <Route path="/api/coupons/:couponID" exact>
                     <CouponCard user={storedUser}/>
                 </Route>
-                <Route path="/api/saved">
-                    <SavedOffers user={storedUser}/>
-                </Route>
-                <Route path="/api/settings">
-                    <Settings user={storedUser}/>
-                </Route>
+                <Route path="/api/saved" component={SavedOffers} />
+                <Route path="/api/settings" component={Settings}/>
                 <Route path="/api/support">
                     <Support user={storedUser} />
                 </Route>
-                {storedUser.role && (storedUser.role === 'admin' && 
+                {user.role && (user.role === 'admin' && 
                 <Route path="/api/admin" render={(routeProps) => (
                     <AdminPanel 
                         {...routeProps} 

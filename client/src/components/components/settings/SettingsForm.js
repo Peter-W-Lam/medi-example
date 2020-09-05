@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import {toast} from 'react-toastify'
@@ -6,9 +6,11 @@ import systemInfo from '../../../utils/healthcareSystems'
 import {updateUserInfo} from '../../../api/user'
 import {Link} from 'react-router-dom'
 import './SettingsForm.css'
+import {UserContext} from '../../context/UserContext'
 
 export default function SettingsForm(props) {
     const [formValues, setFormValues] = useState({})
+    const [user, setUser] = useContext(UserContext)
 
     const handleInputChange = (e) => {
         const newValues = {...formValues}
@@ -19,7 +21,7 @@ export default function SettingsForm(props) {
     const handleSubmit = (e) => {
         window.location.reload(false)
         // Make PUT request to server
-        updateUserInfo(props.user.accessToken, props.user._id, formValues)
+        updateUserInfo(user.accessToken, user._id, formValues)
     }
 
     const handleInvalidSubmit = (e) => {
@@ -28,20 +30,20 @@ export default function SettingsForm(props) {
 
     const setUserValues = () => {
         const userInfo = {
-            name: props.user.name,
-            email: props.user.email, 
-            healthcareEmail: props.user.healthcareEmail, 
-            healthcareSystem: props.user.healthcareSystem, 
-            healthcareRole: props.user.healthcareRole
+            name: user.name,
+            email: user.email, 
+            healthcareEmail: user.healthcareEmail, 
+            healthcareSystem: user.healthcareSystem, 
+            healthcareRole: user.healthcareRole
         }
         setFormValues(userInfo)
     }
 
     useEffect(() => {
-        if (props.user) {
+        if (user) {
             setUserValues()
         }
-    }, [props.user])
+    }, [user])
 
     return (
         <div className="SettingsForm">
@@ -74,7 +76,7 @@ export default function SettingsForm(props) {
                         value={formValues.email}
                         required/>
                 </FormGroup>
-                {props.user.isVerified ? 
+                {user.isVerified ? 
                 <div>
                 <FormGroup>
                     <Label for="healthcareEmail">Network Email</Label>
