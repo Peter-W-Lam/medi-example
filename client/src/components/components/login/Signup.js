@@ -31,7 +31,7 @@ export default function Signup(props) {
                     Register with Medi
                 </Button>
             
-            <p>Don't have an account? <span className="clickable-text">Join Medi</span></p>
+            <p>Already have an account? <a href="#" onClick={() => props.setIsLogin(true)}>Log in to Medi</a></p>
         </div>
     )
 }

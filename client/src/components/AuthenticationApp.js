@@ -26,7 +26,7 @@ import NoMatch from './pages/NoMatch'
 const AuthenticationApp = (props) => {
     const [storedUser, setStoredUser] = useState({})
     const [user, setUser] = useContext(UserContext)
-    const domain = "mymedi.us.auth0.com";
+    const domain = "dev-r8uf1bz2.us.auth0.com";
     const { user: auth0User, getAccessTokenSilently } = useAuth0();
 
 
@@ -75,10 +75,10 @@ const AuthenticationApp = (props) => {
     }, [user.accessToken])
 
     // testing only
-    // useEffect(() => {
-    //     console.log("Updating storedUser:", storedUser)
-    //     console.log("Updating user:", user)
-    // }, [user])
+    useEffect(() => {
+        // console.log("Updating storedUser:", storedUser)
+        // console.log("Updating user:", user)
+    }, [user])
     
     // Does exact apply to both offer and coupon routes?
     return(

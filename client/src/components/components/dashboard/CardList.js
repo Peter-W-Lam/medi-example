@@ -61,7 +61,6 @@ export default function CardList(props) {
     }, [cardData])
 
     useEffect(() => {
-        console.log("sort type:", props.sortType)
         if (cardData && filteredCardData) {
            filterCards(props.query, props.category, props.sortType) 
         }

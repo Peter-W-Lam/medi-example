@@ -73,7 +73,7 @@ export const getAPItoken = async (domain, getAccessTokenSilently, sub) => {
     try {
 
         const APIaccessToken = await getAccessTokenSilently({
-            audience: `https://medi/api`, 
+            audience: `http://medi-example`, 
             scope: "edit:coupons"
         });
 

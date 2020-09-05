@@ -6,13 +6,17 @@ import Login from './components/login/Login';
 import Signup from './components/login/Signup';
 
 function LoginPage() {
-
+    const [isLogin, setIsLogin] = useState(true)
     const { loginWithRedirect } = useAuth0();
     
 
     return (
         <div className="LoginPage">
-            <Signup loginWithRedirect={loginWithRedirect}/>
+            {isLogin ? 
+            <Login setIsLogin={setIsLogin} loginWithRedirect={loginWithRedirect} /> :
+            <Signup setIsLogin={setIsLogin} loginWithRedirect={loginWithRedirect}/>
+            }
+            
             <div className="login-right">
                 <div className="temp-menu">
                     <a href="#about">About</a>

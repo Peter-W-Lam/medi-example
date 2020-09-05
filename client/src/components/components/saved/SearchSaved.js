@@ -9,7 +9,6 @@ export default function SearchSaved(props) {
     return (
         <div className="SearchSaved">
             <input type="text" value={props.query} placeholder="Search offers" onChange={handleChange}/>
-            <button className="filter-btn">Filter</button>
         </div>
     )
 }

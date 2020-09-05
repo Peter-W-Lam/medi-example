@@ -8,10 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
   // Note: no scope yet
 ReactDOM.render(
     <Auth0Provider
-    domain="mymedi.us.auth0.com"
-    clientId="EfVook2IGHHIapF2WbkCQmhc4j5Oyv2Z"
+    domain="dev-r8uf1bz2.us.auth0.com"
+    clientId="Qk8g1Mois13CNx9CGHq4GygV0rfBSBOK"
     redirectUri={window.location.origin + '/api/home'}
-    audience="https://medi/api"
+    audience="http://medi-example"
     scope="edit:coupons"
     useRefreshTokens={true}
     // cacheLocation="localstorage"

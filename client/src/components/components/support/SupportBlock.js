@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'r
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import {sendSupportEmail} from '../../../api/email'
 import './SupportBlock.css'
+import { toast } from 'react-toastify';
 
 export default function SupportBlock(props) {
     const [message, setMessage] = useState('')
@@ -12,8 +13,8 @@ export default function SupportBlock(props) {
     }
 
     const handleSubmit = (e) => {
-        console.log('sending support message:', message)
         sendSupportEmail(props.user.email, message)
+        toast.success('Your support message has been sent!')
     }
 
     return (

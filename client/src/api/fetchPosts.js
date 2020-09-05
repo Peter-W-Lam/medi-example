@@ -6,7 +6,7 @@ const {toast} = require('react-toastify')
     export const fetchPosts = async (accessToken) => {
         try {
             const res = await axios.get('/api/coupons/', {headers: {'Authorization': `Bearer ${accessToken}`}})
-            console.log(res.data)
+            // console.log(res.data)
             return res.data
         } catch (e) {
             toast.error(e.message)

@@ -12,6 +12,8 @@ const checkScopes = jwtAuthz([ 'edit:coupons' ]);
 router.use('/api/users', checkJwt, userRoutes)
 router.use('/api/coupons', checkJwt, couponRoutes)
 router.use('/api/email', emailRoutes)
+
+
 // If no API routes are hit, send the React app
 router.use(function(req, res) {
 	// console.log("in router")

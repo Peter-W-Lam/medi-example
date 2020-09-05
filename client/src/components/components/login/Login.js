@@ -24,7 +24,7 @@ export default function Login(props) {
                     Go to sign-in
                 </Button>
             
-            <p>Don't have an account? <span className="clickable-text">Join Medi</span></p>
+            <p>Don't have an account? <a href="#" onClick={() => props.setIsLogin(false)}>Join Medi</a></p>
         </div>
     )
 }
