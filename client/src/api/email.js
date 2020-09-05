@@ -1,8 +1,8 @@
 const axios = require('axios')
 const {toast} = require('react-toastify')
 
-module.exports = {
-    sendVerificationEmail: async (healthcareEmail, accessToken, userID) => {
+
+    export const sendVerificationEmail = async (healthcareEmail, accessToken, userID) => {
         try {
             const res = await axios({
                 method: 'post', 
@@ -28,8 +28,8 @@ module.exports = {
             });
             console.log(e)
         }
-    }, 
-    sendSupportEmail: (email, message) => {
+    }
+    export const sendSupportEmail = (email, message) => {
         axios({
             method: 'post', 
             url: '/api/email/support', 
@@ -43,4 +43,3 @@ module.exports = {
                 hideProgressBar: true
             }))
     }
-}
