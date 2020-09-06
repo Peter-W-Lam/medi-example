@@ -1,5 +1,5 @@
 # Medi
-![](./client/src/assets/medi-1.jpg)
+![Mockup of Medi](./client/src/assets/mockup.jpg)
 
 ## Description of Project
 Medi is a membership loyalty platform for healthcare professionals, offering discounts and offers to doctors and nurses. The platform aims to work similarly to how Unidays currently does for college students. Registering with the platform is a two-step process, wherein a user first registers with their personal email and password combination for logging in and out of the platform, and then provides their healthcare network email for verifying that they are a healthcare professional.
