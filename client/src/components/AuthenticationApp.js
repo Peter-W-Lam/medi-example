@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {Switch, Route} from 'react-router-dom'
 import {useAuth0} from '@auth0/auth0-react'
-import axios from 'axios'
 import {ToastContainer, toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 import Dashboard from './pages/Dashboard'
-import AdminPanel from './AdminPanel'
+import AdminPanel from './components/adminPanel/AdminPanel'
 import NavBar from './components/navbar/NavBar'
 import Profile from './pages/Profile'
 import SavedOffers from './pages/SavedOffers'
@@ -73,14 +72,7 @@ const AuthenticationApp = (props) => {
     useEffect(() => {
         fetchUserID()
     }, [user.accessToken])
-
-    // testing only
-    useEffect(() => {
-        // console.log("Updating storedUser:", storedUser)
-        // console.log("Updating user:", user)
-    }, [user])
     
-    // Does exact apply to both offer and coupon routes?
     return(
         <div className="mainApp">
             <ToastContainer />

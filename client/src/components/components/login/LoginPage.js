@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import './LoginPage.css'
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginBG from '../assets/login-bg.png'
-import Login from './components/login/Login';
-import Signup from './components/login/Signup';
+import LoginBG from '../../../assets/login-bg.png'
+import Login from './Login';
+import Signup from './Signup';
 
 function LoginPage() {
     const [isLogin, setIsLogin] = useState(true)

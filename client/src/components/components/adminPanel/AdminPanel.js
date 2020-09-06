@@ -7,7 +7,7 @@ import {
 } from 'reactstrap'
 import CouponListItem from './CouponListItem'
 import axios from 'axios'
-import {UserContext} from './context/UserContext'
+import {UserContext} from '../../context/UserContext'
 function AdminPanel(props) {
     const [coupons, setCoupons] = useState(null)
     const [user, setUser] = useContext(UserContext)
